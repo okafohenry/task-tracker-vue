@@ -1,22 +1,38 @@
 <template>
-  <form>
-    <label htmlFor="task">Task</label><br/>
-    <input type="text" id="task" placeholder="Add Task" /><br/>
-    <label htmlFor="day-time">Day & Time</label><br/>
-    <input type="datetime-local" id="day-time" placeholder="Add Day & TIme" /><br/>
+  <form @submit="handleSubmit()">
+    <div>
+      <label>Task</label><br/>
+      <input type="text" v-model="task" id="task" placeholder="Add Task" />
+    </div>
+    <div>
+      <label>Day & Time</label><br/>
+      <input type="datetime-local" v-model="day" id="day-time" placeholder="Add Day & TIme" />
+    </div>
     <div class="checkbox">
       <label>Set Reminder</label>
-      <input type="checkbox" />
+      <input type="checkbox" v-model="reminder" />
     </div>
-    <button class="btn" type="submit"> Save Task </button>
-
+    <button class="btn" @click="handleClick()"> Save Task </button>
   </form>
 </template>
 <script>
-import Button from "@/components/Button";
-export default {
-  components: {Button}
-}
+  import Button from "@/components/Button";
+  export default {
+    components: {Button},
+    methods: {
+      handleClick(event) {
+        event.preventDefault();
+        console.log("logged!");
+      }
+    },
+    data(){
+      return{
+        task: '',
+        day: '',
+        reminder: false
+      }
+    }
+  };
 </script>
 <style scoped>
   form{
@@ -33,6 +49,9 @@ export default {
     background: #000;
     border: none;
     color: #fff;
+  }
+  div{
+    margin-top: 15px;
   }
   .checkbox{
     display: flex;
